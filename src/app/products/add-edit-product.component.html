@@ -1,0 +1,88 @@
+﻿  <h1>{{title}}</h1>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Product Name</label>
+            <input type="text" formControlName="productname" class="form-control"
+             [ngClass]="{ 'is-invalid': submitted && f.productname.errors }" />
+            <div *ngIf="submitted && f.productname.errors" class="invalid-feedback">
+                <div *ngIf="f.productname.errors.required">Product Name is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Product category</label>
+            <select formControlName="productcategory" class="form-control">
+              <option value="Category 1">Category 1</option>
+              <option value="Category 2">Category 2</option>
+              <option value="Category 3">Category 3</option>
+          </select>
+        </div>
+    </div>
+    <div class="row">
+      <span> Product Type</span>
+      <br/>
+      <div class="mb-6 col">
+      <label>
+        <input type="radio" value="Brand New" formControlName="productType">
+          <span>Brand New</span>
+      </label>
+      &nbsp;&nbsp;
+      <label>
+        <input type="radio" value="Second Hand" formControlName="productType">
+          <span>Second Hand</span>
+      </label>
+      &nbsp;&nbsp;
+      <label>
+        <input type="radio" value="Refurbished" formControlName="productType">
+          <span>Refurbished</span>
+      </label>
+    </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="mb-3 col">
+        <input type='file' (change)="onSelectFile($event)" formControlName="productImage" class="form-control">
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="mb-2">
+        <label>Price</label>
+        <input type="number" formControlName="price" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+          <div *ngIf="f.price.errors.required">Price is required</div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Additional Description</label>
+            <textarea type="text" formControlName="additionaldescription"
+             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.additionaldescription.errors }"></textarea>
+            <div *ngIf="submitted && f.additionaldescription.errors" class="invalid-feedback">
+                <div *ngIf="f.additionaldescription.errors.required">Additional Description is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">
+               Comments
+            </label>
+            <textarea type="text" formControlName="comments" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.comments.errors }" ></textarea>
+            <div *ngIf="submitted && f.comments.errors" class="invalid-feedback">
+                <div *ngIf="f.comments.errors.required">Comments is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            Save
+        </button>
+        <a routerLink="/products" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>
